@@ -6,6 +6,19 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      'grid-xl': {'max': '1560px'},
+      'grid-lg': {'max': '1345px'},
+      'grid-md': {'max': '1050px'},
+      'grid-sm': {'max': '380px'},
+      'card-md': {'max': '800px'},
+      'card-sm': {'max': '380px'},
+      'm-grid-2xl': {'max': '1560px'},
+      'm-grid-xl': {'max': '1345px'},
+      'm-grid-lg': {'max': '1130px'},
+      'm-grid-md': {'max': '1050px'},
+      'm-grid-sm': {'max': '800px'},
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

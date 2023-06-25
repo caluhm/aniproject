@@ -2,26 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+@layer utilities {
+    .shadow-custom {
+        box-shadow: 0 4px 6px rgba(49,54,68,.05), 0 5px 20px rgba(49,54,68,.08);
+        transition: box-shadow .6s ease;
+    }
+    .shadow-custom:hover {
+        box-shadow: 0 4px 6px rgba(49,54,68,.09), 0 10px 40px rgba(49,54,68,.3);
+    }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    @keyframes pulsate-opacity {
+        0% {
+            opacity: 0.7;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0.7;
+        }
+    }
+    
+    .pulsate-opacity {
+        animation: pulsate-opacity 1.25s ease-out;
+        animation-iteration-count: infinite;
+        opacity: 0.5;
+    }
 }
