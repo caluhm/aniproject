@@ -60,7 +60,7 @@ export default function Home() {
 
   const [page, setPage] = useState(1); // State variable for current page
   const [lastPage, setLastPage] = useState(1); // State variable for last page
-  const [hasNextPage, setHasNextPage] = useState(true); // State variable for whether there is a next page
+  const [hasNextPage, setHasNextPage] = useState(false); // State variable for whether there is a next page
   const [total, setTotal] = useState(1); // State variable for total number of anime
 
   const [data, setData] = useState<DataProps | null>(null); // State variable for API data
@@ -103,10 +103,12 @@ export default function Home() {
         season={season!}
         seasonYear={seasonYear}
       />
-      {data !== null && (
+      {data !== null ? (
         <CardGrid 
           Page={data.data.Page} 
         />
+      ) : (
+        <CardGridLoading />
       )}
     </main>
   )
