@@ -39,6 +39,18 @@ export default async function getServerSideData(id: number) {
             seasonYear
             seasonInt
             episodes
+            duration
+            chapters
+            volumes
+            countryOfOrigin
+            isLicensed
+            source
+            hashtag
+            trailer {
+            id
+            site
+            thumbnail
+            }
             coverImage {
             extraLarge
             }
@@ -46,18 +58,39 @@ export default async function getServerSideData(id: number) {
             genres
             averageScore
             popularity
+            favourites
             tags {
             name
             }
             relations {
-            nodes {
-                id
-                title {
-                romaji
-                english
-                native
-                }
+             edges {
+                relationType(version: 2)
+                node {
+                    id
+                    title {
+                        romaji
+                        english
+                        native
+                    }
+                    type
+                    coverImage {
+                        extraLarge
+                    }
+             }
             }
+            }
+            characters(sort: [RELEVANCE], page: 1, perPage: 5) {
+                nodes {
+                    id
+                    name {
+                        full
+                    }
+                    image {
+                        large
+                    }
+                    gender
+                    age
+                }
             }
             studios(isMain: true) {
                 nodes {
@@ -76,7 +109,7 @@ export default async function getServerSideData(id: number) {
 
         // Define our query variables and values that will be used in the query request
         var variables = {
-            id: 15125
+            id: id
         };
 
         // Define the config we'll need for our Api request

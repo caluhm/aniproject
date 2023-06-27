@@ -95,6 +95,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#13171D]">
+      <span className="fixed blur-[200px] w-[600px] h-[600px] rounded-full top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 bg-gradient-to-tl to-blue-400/20 from-indigo-600/20"></span>
       <Header 
         page={page} 
         hasNextPage={hasNextPage}

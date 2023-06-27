@@ -18,6 +18,9 @@ module.exports = {
       'm-grid-lg': {'max': '1130px'},
       'm-grid-md': {'max': '1050px'},
       'm-grid-sm': {'max': '800px'},
+      'md' : {'min': '800px'},
+      'rg' : {'max': '500px'},
+      'sm': {'min': '380px'},
     },
     extend: {
       backgroundImage: {
