@@ -45,10 +45,6 @@ export default function Card({ anime, id, page }: CardProps) {
 
     const popularityNum = page === 1 ? id + 1 : id + 1 + (page - 1) * 50;
 
-    if (description.length > 255) {
-    truncatedDescription = description.substring(0, 255) + ' ...';
-    }
-
     let timeString = null;
 
     if (anime.nextAiringEpisode === null) {
@@ -87,7 +83,7 @@ export default function Card({ anime, id, page }: CardProps) {
                 </div>
             </Link>
             <div className="flex flex-col justify-between w-full h-full">
-                <div className="w-full text-white text-left p-4">
+                <div className="w-full text-white text-left p-4 overflow-hidden">
                     <div className="w-full flex flex-row justify-between">
                         <div className="flex flex-col">
                             <div className="text-[0.7rem] font-semibold text-gray-500">{anime.episodes ? "Ep 1 of " + anime.episodes + " airing in" : "Ep 1 airing in"}</div>
@@ -104,7 +100,7 @@ export default function Card({ anime, id, page }: CardProps) {
                     </div>
                     <div className="text-[0.66rem] font-medium text-gray-500 pt-2.5">
                         <div className="text-[0.7rem] font-semibold text-gray-400">{anime.format} - {anime.type}</div>
-                        <div>{truncatedDescription}</div>
+                        <div className="truncate-2-lines">{truncatedDescription}</div>
                     </div>
                 </div>
                 <div 
