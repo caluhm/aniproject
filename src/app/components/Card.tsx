@@ -43,7 +43,7 @@ export default function Card({ anime, id, page }: CardProps) {
     const description = anime.description ? anime.description.replace(/<\/?i>/g, '').replace(/<br\s?\/?>/g, '') : "No description available."
     let truncatedDescription = description;
 
-    const popularityNum = page === 1 ? id + 1 : id + 1 + (page - 1) * 50;
+    const popularityNum = page === 1 ? id + 1 : id + 1 + (page - 1) * 15;
 
     let timeString = null;
 
