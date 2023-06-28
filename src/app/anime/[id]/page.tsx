@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: { id: number } }) {
 
     let timeString = null;
 
-    if (data.data.Media.nextAiringEpisode.nextAiringEpisode === null) {
+    if (data.data.Media.nextAiringEpisode === null) {
         timeString = 'TBA';
     } else {
 
