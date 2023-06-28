@@ -104,7 +104,7 @@ export default function Card({ anime, id, page }: CardProps) {
                     </div>
                 </div>
                 <div 
-                    className="flex flex-wrap justify-start gap-3 items-center text-center p-4"
+                    className="flex flex-wrap justify-start gap-3 items-center text-center p-4 rounded-br"
                     style={{ backgroundColor }}
                 >
                     {anime.genres.slice(0, 2).map((genre, index) => {
