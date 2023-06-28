@@ -2,6 +2,7 @@ import StudioPageGridWrapper from "@/app/components/StudioPageGridWrapper";
 import getStudioByID from "../../api/getStudioByID"
 import Link from "next/link";
 import Image from "next/image";
+import BackButton from "@/app/components/BackButton";
 
 export const revalidate = 30 // revalidate this page every 30 seconds
 
@@ -11,7 +12,8 @@ export default async function Page({ params }: { params: { id: number } }) {
     const backgroundColor = "rgba(19, 23, 29, 0.70)";
 
     return (
-        <main className="flex flex-col min-h-screen bg-[#13171D] text-white justify-center items-center py-14 rg:py-8">
+        <main className="flex flex-col min-h-screen bg-[#13171D] text-white justify-center items-center py-14">
+            <BackButton />
             <div className="flex flex-col justify-start px-12 rg:px-6 max-w-[1140px] w-full">
                 <h1 className="text-2xl font-bold text-neutral-200 pb-2">{data.data.Studio.name}</h1>
                 <h2 className="text-base font-semibold text-neutral-300">Popular Releases</h2>

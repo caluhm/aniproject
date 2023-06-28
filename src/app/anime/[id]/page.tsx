@@ -2,6 +2,7 @@ import Image from "next/image";
 import getAnimeByID from "../../api/getAnimeByID"
 import Link from "next/link";
 import CharactersPageGridWrapper from "@/app/components/CharactersPageGridWrapper";
+import BackButton from "@/app/components/BackButton";
 
 export const revalidate = 30 // revalidate this page every 30 seconds
 
@@ -31,6 +32,7 @@ export default async function Page({ params }: { params: { id: number } }) {
 
     return (
         <main className="min-h-screen bg-neutral-950 text-white">
+            <BackButton />
             <div>
                 <div className="relative w-full md:h-[342px] h-[275px] rg:h-[225px]">
                     {data.data.Media.bannerImage ? (
