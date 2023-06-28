@@ -11,7 +11,7 @@ async function handleResponse(response: { json: () => Promise<any>; ok: any; }) 
     console.error(error);
   }
 
-export default async function getServerSideData(season: string, seasonYear: number, page: number) {
+export default async function getServerSideData(season: string, seasonYear: number, page: number | null) {
     var query = `
         query ($id: Int, $page: Int, $perPage: Int, $season: MediaSeason, $seasonYear: Int, $isAdult:Boolean, $sort: [MediaSort]) {
             Page (page: $page, perPage: $perPage) {
@@ -60,8 +60,8 @@ export default async function getServerSideData(season: string, seasonYear: numb
         seasonYear: seasonYear,
         isAdult: false,
         sort: "POPULARITY_DESC",
-        page: page,
-        perPage: 50
+        page: page? page : 1,
+        perPage: 15
     };
       
     // Define the config we'll need for our Api request

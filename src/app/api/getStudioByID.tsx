@@ -18,13 +18,18 @@ export default async function getStudioByID(id: number) {
             id
             name
             isAnimationStudio
-            media (sort: POPULARITY_DESC, isMain: true, page: 1, perPage: 6) {
+            media (sort: POPULARITY_DESC, isMain: true, page: 1, perPage: 25) {
                 nodes {
                     id
                     title {
                         romaji
                         english
                         native
+                    }
+                    type
+                    format
+                    coverImage {
+                        extraLarge
                     }
                 }
             }

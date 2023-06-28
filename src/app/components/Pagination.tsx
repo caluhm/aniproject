@@ -1,3 +1,7 @@
+'use client'
+
+import { useRouter } from "next/navigation";
+
 import { useRef, useEffect, useState } from 'react';
 
 import { BiFirstPage, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
@@ -5,10 +9,10 @@ import { BiFirstPage, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 export default function Pagination({
     currentPage, 
     hasNextPage, 
-    handlePrevPage, 
-    handleNextPage,
-}: {currentPage: number, hasNextPage: boolean, handlePrevPage: () => void, handleNextPage: () => void}
+}: {currentPage: number, hasNextPage: boolean}
 ) {
+    const router = useRouter();
+
     const [prevPageColour, setPrevPageColour] = useState<string>("text-neutral-100 hover:bg-blue-500");
     const [nextPageColour, setNextPageColour] = useState<string>("text-neutral-100 hover:bg-blue-500");
 
@@ -40,12 +44,23 @@ export default function Pagination({
         }
     }, [currentPage, hasNextPage]);
 
+    const handlePage = (page: number) => {
+        const currentParams = new URLSearchParams(window.location.search);
+
+        currentParams.set('page', page.toString());
+
+        const newSearchParams = currentParams.toString();
+        const newPathname = `${window.location.pathname}?${newSearchParams}`;
+
+        router.push(newPathname);
+    }
+
     return (
         <div>
             <div className="flex flex-row justify-center items-center gap-5">
                 <button 
                     className={`rounded-full sm:w-10 sm:h-10 w-8 h-8 flex justify-center items-center ${prevPageColour} transition-colors ease-in-out duration-200`}
-                    onClick={() => (prevPageRef.current && prevPageRef.current.disabled) ? null : handlePrevPage()}
+                    onClick={() => (prevPageRef.current && prevPageRef.current.disabled) ? null : handlePage(currentPage-1)}
                     ref={prevPageRef}
                 >
                     <BiChevronLeft className='sm:w-7 sm:h-7 w-6 h-6'/>
@@ -55,7 +70,7 @@ export default function Pagination({
                 </div>
                 <button 
                     className={`rounded-full sm:w-10 sm:h-10 w-8 h-8 flex justify-center items-center ${nextPageColour} transition-colors ease-in-out duration-200`}
-                    onClick={() => (nextPageRef.current && nextPageRef.current.disabled) ? null : handleNextPage()}
+                    onClick={() => (nextPageRef.current && nextPageRef.current.disabled) ? null : handlePage(currentPage+1)}
                     ref={nextPageRef}
                 >
                     <BiChevronRight className='sm:w-7 sm:h-7 w-6 h-6'/>

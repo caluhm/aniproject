@@ -1,10 +1,5 @@
-'use client'
-
-import { useState, useEffect } from "react";
-
 import CardGrid from "./components/CardGrid";
 import getServerSideData  from "./api/getServerSideData";
-import CardGridLoading from "./components/CardGridLoading";
 
 import calcSeason from "./lib/calcSeason";
 import Header from "./components/Header";
@@ -52,65 +47,27 @@ type DataProps = {
   };
 };
 
-export const revalidate = 30 // revalidate this page every 30 seconds
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+export const revalidate = 0
 
-export default function Home() {
+export default async function Home({searchParams: { page }}: {searchParams: { page: number }}) {
   const season = calcSeason(new Date().getMonth());
   const seasonYear = new Date().getFullYear();
-
-  const [page, setPage] = useState(1); // State variable for current page
-  const [lastPage, setLastPage] = useState(1); // State variable for last page
-  const [hasNextPage, setHasNextPage] = useState(false); // State variable for whether there is a next page
-  const [total, setTotal] = useState(1); // State variable for total number of anime
-
-  const [data, setData] = useState<DataProps | null>(null); // State variable for API data
-  
-  const nextPage = async () => {
-    setPage((prevPage) => prevPage + 1); // Increment the page state
-    const newData = await getServerSideData(season!, seasonYear, page + 1); // Fetch data for the next page
-    setData(newData); // Update the data state
-    setHasNextPage(newData.data.Page.pageInfo.hasNextPage);
-    console.log(newData.data.Page.pageInfo.hasNextPage)
-  };
-
-  const prevPage = async () => {
-    setPage((prevPage) => prevPage -1); // Increment the page state
-    const newData = await getServerSideData(season!, seasonYear, page - 1); // Fetch data for the next page
-    setData(newData); // Update the data state
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const initialData = await getServerSideData(season!, seasonYear, page);
-      setData(initialData);
-
-      setLastPage(initialData.data.Page.pageInfo.lastPage);
-      setHasNextPage(initialData.data.Page.pageInfo.hasNextPage);
-      setTotal(initialData.data.Page.pageInfo.total);
-      setPage(initialData.data.Page.pageInfo.currentPage);
-    };
-  
-    fetchData();
-  }, [season, seasonYear, page]);
+  const data = await getServerSideData(season!, seasonYear, page) as DataProps;
 
   return (
-    <main className="min-h-screen bg-[#13171D]">
+    <main className="min-h-screen bg-[#13171D] pb-14 rg:pb-8">
       <span className="fixed blur-[200px] w-[600px] h-[600px] rg:h-[400px] rounded-full top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 bg-gradient-to-tl to-blue-400/20 from-indigo-600/20"></span>
       <Header 
-        page={page} 
-        hasNextPage={hasNextPage}
-        handleNextPage={nextPage} 
-        handlePrevPage={prevPage} 
+        page={data.data.Page.pageInfo.currentPage} 
+        hasNextPage={data.data.Page.pageInfo.hasNextPage}
         season={season!}
         seasonYear={seasonYear}
       />
-      {data !== null ? (
         <CardGrid 
           Page={data.data.Page} 
         />
-      ) : (
-        <CardGridLoading />
-      )}
     </main>
   )
 }
