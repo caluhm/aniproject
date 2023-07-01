@@ -50,7 +50,7 @@ export default function CardGrid({Page}: DataProps) {
           <div className="w-full flex justify-center">
             <InnerGridWrapper>
               {Page.media.map((anime: any, index: number) => (
-                <Card anime={anime} id={index} key={anime.id} page={Page.pageInfo.currentPage}/>
+                <Card anime={anime} id={index} page={Page.pageInfo.currentPage} key={anime.id}/>
               ))}
             </InnerGridWrapper>
           </div>

@@ -1,8 +1,9 @@
-import CardGrid from "./components/CardGrid";
 import getServerSideData  from "./api/getServerSideData";
 
-import calcSeason from "./lib/calcSeason";
 import Header from "./components/Header";
+import CardGrid from "./components/CardGrid";
+
+import calcSeason from "./lib/calcSeason";
 
 type DataProps = {
   data: {
@@ -65,9 +66,9 @@ export default async function Home({searchParams: { page }}: {searchParams: { pa
         season={season!}
         seasonYear={seasonYear}
       />
-        <CardGrid 
-          Page={data.data.Page} 
-        />
+      <CardGrid 
+        Page={data.data.Page} 
+      />
     </main>
   )
 }
