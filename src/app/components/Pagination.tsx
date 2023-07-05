@@ -42,26 +42,25 @@ export default function Pagination({
     }
 
     return (
-        <div>
-            <div className="flex flex-row justify-center items-center gap-5">
+        <div className="m-grid-sm:h-8 h-10 flex flex-row rounded-md border-2 border-neutral-700 overflow-hidden">
+           
                 <button 
-                    className={`rounded-full sm:w-10 sm:h-10 w-8 h-8 flex justify-center items-center ${prevPageColour} transition-colors ease-in-out duration-200`}
+                    className={`flex justify-center items-center bg-[#1F232D] border-neutral-700 px-1 m-grid-sm:px-0.5 ${prevPageColour} transition-colors ease-in-out duration-200`}
                     onClick={() => (prevPageRef.current && prevPageRef.current.disabled) ? null : handlePage(currentPage - 1)}
-                    ref={prevPageRef}
+                    ref={prevPageRef}    
                 >
-                    <BiChevronLeft className='sm:w-7 sm:h-7 w-6 h-6'/>
+                    <BiChevronLeft className='m-grid-sm:w-6 m-grid-sm:h-6 w-7 h-7'/>
                 </button>
-                <div className="rounded-full sm:w-10 sm:h-10 w-8 h-8 flex sm:text-lg text-base justify-center items-center text-neutral-100 bg-blue-500 transition-colors ease-in-out duration-200 cursor-pointer select-none">
+                <div className="flex justify-center items-center border-x-2 text-neutral-100 bg-[#1F232D] border-neutral-700 w-10 m-grid-sm:w-9">
                     {currentPage}
                 </div>
                 <button 
-                    className={`rounded-full sm:w-10 sm:h-10 w-8 h-8 flex justify-center items-center ${nextPageColour} transition-colors ease-in-out duration-200`}
+                    className={`flex justify-center items-center bg-[#1F232D] px-1 m-grid-sm:px-0.5 ${nextPageColour} transition-colors ease-in-out duration-200`}
                     onClick={() => (nextPageRef.current && nextPageRef.current.disabled) ? null : handlePage(currentPage + 1)}
-                    ref={nextPageRef}
+                    ref={nextPageRef}    
                 >
-                    <BiChevronRight className='sm:w-7 sm:h-7 w-6 h-6'/>
+                    <BiChevronRight className='m-grid-sm:w-6 m-grid-sm:h-6 w-7 h-7'/>
                 </button>
-            </div>
         </div>
     )
 }

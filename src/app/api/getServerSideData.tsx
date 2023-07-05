@@ -11,9 +11,9 @@ async function handleResponse(response: { json: () => Promise<any>; ok: any; }) 
     console.error(error);
   }
 
-export default async function getServerSideData(season: string, seasonYear: number, page: number | null) {
+export default async function getServerSideData(season: string, seasonYear: number, page: number | null, search: string | null, sort: string | null) {
     var query = `
-        query ($id: Int, $page: Int, $perPage: Int, $season: MediaSeason, $seasonYear: Int, $isAdult:Boolean, $sort: [MediaSort]) {
+        query ($id: Int, $page: Int, $perPage: Int, $season: MediaSeason, $seasonYear: Int, $isAdult:Boolean, $sort: [MediaSort], $search: String) {
             Page (page: $page, perPage: $perPage) {
                 pageInfo {
                     total
@@ -22,7 +22,7 @@ export default async function getServerSideData(season: string, seasonYear: numb
                     hasNextPage
                     perPage
                 }
-                media (id: $id, type: ANIME, season: $season, seasonYear: $seasonYear, isAdult: $isAdult, sort: $sort) {
+                media (id: $id, type: ANIME, season: $season, seasonYear: $seasonYear, isAdult: $isAdult, sort: $sort, search: $search) {
                     id
                     title {
                     romaji
@@ -58,9 +58,10 @@ export default async function getServerSideData(season: string, seasonYear: numb
     var variables = {
         season: season,
         seasonYear: seasonYear,
+        search: search,
         isAdult: false,
-        sort: "POPULARITY_DESC",
-        page: page? page : 1,
+        sort: sort ? sort : "POPULARITY_DESC",
+        page: page ? page : 1,
         perPage: 15
     };
       

@@ -52,10 +52,10 @@ export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
 export const revalidate = 0
 
-export default async function Home({searchParams: { page }}: {searchParams: { page: number }}) {
+export default async function Home({searchParams: { page, search, sort }}: {searchParams: { page: number, search: string, sort: string }}) {
   const season = calcSeason(new Date().getMonth());
   const seasonYear = new Date().getFullYear();
-  const data = await getServerSideData(season!, seasonYear, page) as DataProps;
+  const data = await getServerSideData(season!, seasonYear, page, search, sort) as DataProps;
 
   return (
     <main className="min-h-screen bg-[#13171D] pb-14 rg:pb-8">
